@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.7.5 on darwin)" generated="20210908 14:17:41.234" rpa="true" schemaversion="2">
+<suite id="s1" name="Tasks" source="/Users/cmin/Work/Robocorp/Robots/rpa-cert-2/tasks.robot">
+<test id="s1-t1" name="Order robots from RobotSpareBin Industries Inc">
+<kw name="Open the robot order website">
+<kw name="Open Available Browser" library="RPA.Browser.Selenium">
+<arg>${order_url}</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<msg timestamp="20210908 14:17:42.091" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20210908 14:17:42.099" level="INFO">Created download root directory: /Users/cmin/.robocorp/webdrivers</msg>
+<msg timestamp="20210908 14:17:42.100" level="INFO">Created symlink directory: /Users/cmin/.robocorp/webdrivers</msg>
+<msg timestamp="20210908 14:17:42.100" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20210908 14:17:45.434" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg timestamp="20210908 14:17:45.435" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg timestamp="20210908 14:17:45.435" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
+<status status="PASS" starttime="20210908 14:17:42.071" endtime="20210908 14:17:49.012"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="RPA.Browser.Selenium">
+<arg>class:modal-content</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20210908 14:17:49.014" endtime="20210908 14:17:49.071"/>
+</kw>
+<kw name="Click Button" library="RPA.Browser.Selenium">
+<arg>class:btn-dark</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210908 14:18:02.833" level="INFO">Clicking button 'class:btn-dark'.</msg>
+<status status="PASS" starttime="20210908 14:17:49.072" endtime="20210908 14:18:03.213"/>
+</kw>
+<status status="PASS" starttime="20210908 14:17:42.070" endtime="20210908 14:18:03.214"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Finished</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210908 14:18:24.079" level="INFO">Finished</msg>
+<status status="PASS" starttime="20210908 14:18:03.215" endtime="20210908 14:18:24.080"/>
+</kw>
+<status status="PASS" starttime="20210908 14:17:42.068" endtime="20210908 14:18:24.082"/>
+</test>
+<doc>Orders robots from RobotSpareBin Industries Inc.
+Saves the order HTML receipt as a PDF file.
+Saves the screenshot of the ordered robot.
+Embeds the screenshot of the robot to the PDF receipt.
+Creates ZIP archive of the receipts and the images.</doc>
+<status status="PASS" starttime="20210908 14:17:41.237" endtime="20210908 14:18:24.087"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
