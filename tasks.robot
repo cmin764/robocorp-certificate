@@ -36,7 +36,21 @@ Get orders
 Fill the form
     [Arguments]    ${row}
     Select From List By Value    name:head    ${row}[Head]
-    Log    ${row}
+    Select Radio Button    body    ${row}[Body]
+    Input Text    xpath://input[@type="number"]    ${row}[Legs]
+    Input Text    name:address    ${row}[Address]
+
+Preview the robot
+    Click Button    id:preview
+
+Submit the order
+    Click Button    id:order
+    FOR    ${i}    IN RANGE    9999999
+        ${success}=    Is Element Visible    id:receipt
+        Exit For Loop If    ${success}
+        Click Button    id:order
+    END
+    Click Button    id:order-another
 
 
 *** Tasks ***
@@ -47,11 +61,12 @@ Order robots from RobotSpareBin Industries Inc
     ${orders} =    Get orders
     FOR    ${row}    IN    @{orders}
         Fill the form    ${row}
-    #     Preview the robot
-    #     Submit the order
+        Preview the robot
+        Submit the order
+        Close consent modal
     #     ${pdf}=    Store the receipt as a PDF file    ${row}[Order number]
     #     ${screenshot}=    Take a screenshot of the robot    ${row}[Order number]
     #     Embed the robot screenshot to the receipt PDF file    ${screenshot}    ${pdf}
-    #     Go to order another robot
+        # Go to order another robot
     END
     # Create a ZIP file of the receipts

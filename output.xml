@@ -1,59 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.1 (Python 3.7.5 on darwin)" generated="20210908 14:17:41.234" rpa="true" schemaversion="2">
-<suite id="s1" name="Tasks" source="/Users/cmin/Work/Robocorp/Robots/rpa-cert-2/tasks.robot">
-<test id="s1-t1" name="Order robots from RobotSpareBin Industries Inc">
-<kw name="Open the robot order website">
-<kw name="Open Available Browser" library="RPA.Browser.Selenium">
-<arg>${order_url}</arg>
-<doc>Attempts to open a browser on the user's device from a set of
-supported browsers. Automatically downloads a corresponding webdriver
-if none is already installed.</doc>
-<msg timestamp="20210908 14:17:42.091" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
-<msg timestamp="20210908 14:17:42.099" level="INFO">Created download root directory: /Users/cmin/.robocorp/webdrivers</msg>
-<msg timestamp="20210908 14:17:42.100" level="INFO">Created symlink directory: /Users/cmin/.robocorp/webdrivers</msg>
-<msg timestamp="20210908 14:17:42.100" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
-<msg timestamp="20210908 14:17:45.434" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
-<msg timestamp="20210908 14:17:45.435" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
-&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
-<msg timestamp="20210908 14:17:45.435" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
-<status status="PASS" starttime="20210908 14:17:42.071" endtime="20210908 14:17:49.012"/>
+<robot generator="Robot 4.1.1 (Python 3.7.5 on darwin)" generated="20210909 09:03:03.600" rpa="false" schemaversion="2">
+<suite id="s1" name="Robot Scratchpad" source="/Users/cmin/.vscode/extensions/robocorp.robotframework-lsp-0.22.0/src/robotframework_ls/vendored/robotframework_interactive/robot_scratchpad.robot">
+<test id="s1-t1" name="Default Task/Test">
+<kw name="Interpreter Main Loop" library="MainLoop">
+<kw name="Select Radio Button">
+<arg>body</arg>
+<arg>${row}[Body]</arg>
+<msg timestamp="20210909 09:03:17.478" level="FAIL">No keyword with name 'Select Radio Button' found.</msg>
+<status status="FAIL" starttime="20210909 09:03:17.478" endtime="20210909 09:03:17.478"/>
 </kw>
-<kw name="Wait Until Element Is Visible" library="RPA.Browser.Selenium">
-<arg>class:modal-content</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20210908 14:17:49.014" endtime="20210908 14:17:49.071"/>
-</kw>
-<kw name="Click Button" library="RPA.Browser.Selenium">
-<arg>class:btn-dark</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<msg timestamp="20210908 14:18:02.833" level="INFO">Clicking button 'class:btn-dark'.</msg>
-<status status="PASS" starttime="20210908 14:17:49.072" endtime="20210908 14:18:03.213"/>
-</kw>
-<status status="PASS" starttime="20210908 14:17:42.070" endtime="20210908 14:18:03.214"/>
+<kw name="Log ${csv_url} console=True">
+<msg timestamp="20210909 09:12:21.504" level="FAIL">No keyword with name 'Log ${csv_url} console=True' found.</msg>
+<status status="FAIL" starttime="20210909 09:12:21.504" endtime="20210909 09:12:21.504"/>
 </kw>
 <kw name="Log" library="BuiltIn">
-<arg>Finished</arg>
+<arg>${csv_url} console=True</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20210908 14:18:24.079" level="INFO">Finished</msg>
-<status status="PASS" starttime="20210908 14:18:03.215" endtime="20210908 14:18:24.080"/>
+<msg timestamp="20210909 09:12:28.969" level="FAIL">Variable '${csv_url}' not found.</msg>
+<status status="FAIL" starttime="20210909 09:12:28.966" endtime="20210909 09:12:28.969"/>
 </kw>
-<status status="PASS" starttime="20210908 14:17:42.068" endtime="20210908 14:18:24.082"/>
+<kw name="Log" library="BuiltIn">
+<arg>${csv_url} console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" starttime="20210909 09:12:37.148" endtime="20210909 09:12:37.149"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${csv_url} console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" starttime="20210909 09:12:49.201" endtime="20210909 09:12:49.202"/>
+</kw>
+<kw name="Select Radio Button" library="RPA.Browser.Selenium">
+<arg>body</arg>
+<arg>${row}[Body]</arg>
+<doc>Sets the radio button group ``group_name`` to ``value``.</doc>
+<msg timestamp="20210909 09:13:14.947" level="FAIL">Variable '${row}' not found.</msg>
+<status status="FAIL" starttime="20210909 09:13:14.945" endtime="20210909 09:13:14.947"/>
+</kw>
+<kw name="Select Radio Button" library="RPA.Browser.Selenium">
+<arg>body</arg>
+<arg>1</arg>
+<doc>Sets the radio button group ``group_name`` to ``value``.</doc>
+<kw name="Capture Page Screenshot" library="RPA.Browser.Selenium">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" starttime="20210909 09:13:55.112" endtime="20210909 09:13:55.112"/>
+</kw>
+<msg timestamp="20210909 09:13:55.116" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20210909 09:13:55.110" endtime="20210909 09:13:55.116"/>
+</kw>
+<kw name="Attach Chrome Browser" library="RPA.Browser.Selenium">
+<arg>58796</arg>
+<doc>Attach to an existing instance of Chrome or Chromium.</doc>
+<kw name="Capture Page Screenshot" library="RPA.Browser.Selenium">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" starttime="20210909 09:19:32.413" endtime="20210909 09:19:32.415"/>
+</kw>
+<msg timestamp="20210909 09:19:32.419" level="FAIL">WebDriverException: Message: unknown error: cannot connect to chrome at localhost:58796
+from chrome not reachable
+</msg>
+<status status="FAIL" starttime="20210909 09:16:48.557" endtime="20210909 09:19:32.419"/>
+</kw>
+<kw name="Select Radio Button" library="RPA.Browser.Selenium">
+<arg>body</arg>
+<arg>1</arg>
+<doc>Sets the radio button group ``group_name`` to ``value``.</doc>
+<kw name="Capture Page Screenshot" library="RPA.Browser.Selenium">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" starttime="20210909 09:19:32.439" endtime="20210909 09:19:32.439"/>
+</kw>
+<msg timestamp="20210909 09:19:32.440" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20210909 09:19:32.438" endtime="20210909 09:19:32.440"/>
+</kw>
+<status status="PASS" starttime="20210909 09:03:03.623" endtime="20210909 09:19:32.453"/>
+</kw>
+<status status="PASS" starttime="20210909 09:03:03.623" endtime="20210909 09:19:32.453"/>
 </test>
-<doc>Orders robots from RobotSpareBin Industries Inc.
-Saves the order HTML receipt as a PDF file.
-Saves the screenshot of the ordered robot.
-Embeds the screenshot of the robot to the PDF receipt.
-Creates ZIP archive of the receipts and the images.</doc>
-<status status="PASS" starttime="20210908 14:17:41.237" endtime="20210908 14:18:24.087"/>
+<status status="PASS" starttime="20210909 09:03:03.601" endtime="20210909 09:19:32.455"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tasks</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot Scratchpad">Robot Scratchpad</stat>
 </suite>
 </statistics>
 <errors>
