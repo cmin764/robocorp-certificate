@@ -34,7 +34,6 @@ Open the robot order website
 Close consent modal
     Wait Until Element Is Visible    class:modal-content
     Click Button    class:btn-dark
-    
 
 Get or download orders
     Add icon    Warning
@@ -95,7 +94,7 @@ Take a screenshot of the robot
 
 Embed the robot screenshot to the receipt PDF file
     [Arguments]    ${ss}    ${pdf}
-    ${files}=    Create List
+    ${files} =    Create List
     ...    ${ss}
     Add Files To PDF    ${files}    ${pdf}    append=True
     Close All Pdfs
