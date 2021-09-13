@@ -12,29 +12,47 @@ Library           RPA.PDF
 Library           Collections
 Library           OperatingSystem
 Library           RPA.Archive
+Library           RPA.Dialogs
+Library           RPA.Robocorp.Vault
 
 Suite Teardown    Close All Browsers
 
 
 *** Variables ***
-${order_url}       https://robotsparebinindustries.com/#/robot-order
-${csv_url}         https://robotsparebinindustries.com/orders.csv
-${csv_file}        ${OUTPUT_DIR}${/}orders.csv
+# ${robot_order_url}       https://robotsparebinindustries.com/#/robot-order
+${orders_url}         https://robotsparebinindustries.com/orders.csv
+${orders_file}        ${OUTPUT_DIR}${/}orders.csv
 ${receipts_dir}    ${OUTPUT_DIR}${/}receipts${/}
 ${receipts_zip}    ${OUTPUT_DIR}${/}receipts.zip
 
 
 *** Keywords ***
 Open the robot order website
-    Open Available Browser    ${order_url}
+    ${urls} =    Get Secret    urls
+    Open Available Browser    ${urls}[robot_order]
 
 Close consent modal
     Wait Until Element Is Visible    class:modal-content
     Click Button    class:btn-dark
+    
 
-Get orders
-    Download    ${csv_url}    ${csv_file}    overwrite=True
-    ${table} =    Read table from CSV    ${csv_file}
+Get or download orders
+    Add icon    Warning
+    Add heading    Use existing orders file or download new one?
+    Add text input    orders_file
+    ...    label=Orders CSV File
+    ...    placeholder=${orders_file}
+    Add submit buttons    buttons=Existing,Download    default=Existing
+    
+    ${result} =    Run dialog
+    IF   "${result.submit}" == "Existing"
+        ${input_file} =     Set Variable If    "${result.orders_file}" != ""    ${result.orders_file}    ${orders_file}
+        Set Test Variable    ${orders_file}    ${input_file}
+    ELSE
+        Download    ${orders_url}    ${orders_file}    overwrite=True
+    END
+
+    ${table} =    Read table from CSV    ${orders_file}
     [Return]    ${table}
 
 Fill the form
@@ -94,10 +112,11 @@ Test
     Log    Done
 
 Order robots from RobotSpareBin Industries Inc
+    ${orders} =    Get or download orders
+
     Open the robot order website
     Close consent modal
 
-    ${orders} =    Get orders
     FOR    ${row}    IN    @{orders}
         Fill the form    ${row}
         Preview the robot
