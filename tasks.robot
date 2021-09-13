@@ -10,14 +10,18 @@ Library           RPA.HTTP
 Library           RPA.Tables
 Library           RPA.PDF
 Library           Collections
+Library           OperatingSystem
+Library           RPA.Archive
 
 Suite Teardown    Close All Browsers
 
 
 *** Variables ***
-${order_url}    https://robotsparebinindustries.com/#/robot-order
-${csv_url}      https://robotsparebinindustries.com/orders.csv
-${csv_file}     ${OUTPUT_DIR}${/}orders.csv
+${order_url}       https://robotsparebinindustries.com/#/robot-order
+${csv_url}         https://robotsparebinindustries.com/orders.csv
+${csv_file}        ${OUTPUT_DIR}${/}orders.csv
+${receipts_dir}    ${OUTPUT_DIR}${/}receipts${/}
+${receipts_zip}    ${OUTPUT_DIR}${/}receipts.zip
 
 
 *** Keywords ***
@@ -30,7 +34,7 @@ Close consent modal
 
 Get orders
     Download    ${csv_url}    ${csv_file}    overwrite=True
-    ${table}=    Read table from CSV    ${csv_file}
+    ${table} =    Read table from CSV    ${csv_file}
     [Return]    ${table}
 
 Fill the form
@@ -46,14 +50,49 @@ Preview the robot
 Submit the order
     Click Button    id:order
     FOR    ${i}    IN RANGE    9999999
-        ${success}=    Is Element Visible    id:receipt
+        ${success} =    Is Element Visible    id:receipt
         Exit For Loop If    ${success}
         Click Button    id:order
     END
+
+Go to order another robot
     Click Button    id:order-another
+    Close consent modal
+
+
+*** Keywords ***
+Store the receipt as a PDF file
+    [Arguments]    ${order_nr}
+    ${pdf_path} =    Set Variable    ${receipts_dir}${order_nr}.pdf
+    Wait Until Element Is Visible    id:receipt
+    ${receipt_html} =    Get Element Attribute    id:receipt    outerHTML
+    Html To Pdf    ${receipt_html}    ${pdf_path}
+    [Return]    ${pdf_path}
+
+Take a screenshot of the robot
+    [Arguments]    ${order_nr}
+    ${ss_path} =    Set Variable    ${receipts_dir}${order_nr}.png
+    Screenshot    locator=id:robot-preview-image    filename=${ss_path}
+    [Return]    ${ss_path}
+
+Embed the robot screenshot to the receipt PDF file
+    [Arguments]    ${ss}    ${pdf}
+    ${files}=    Create List
+    ...    ${ss}
+    Add Files To PDF    ${files}    ${pdf}    append=True
+    Close All Pdfs
+    Remove File    ${ss}
+
+Create a ZIP file of the receipts
+    Archive Folder With Zip    ${receipts_dir}    ${receipts_zip}
 
 
 *** Tasks ***
+Test
+    # Embed the robot screenshot to the receipt PDF file    ${receipts_dir}1.png    ${receipts_dir}1.pdf
+    # Create a ZIP file of the receipts
+    Log    Done
+
 Order robots from RobotSpareBin Industries Inc
     Open the robot order website
     Close consent modal
@@ -63,10 +102,10 @@ Order robots from RobotSpareBin Industries Inc
         Fill the form    ${row}
         Preview the robot
         Submit the order
-        Close consent modal
-    #     ${pdf}=    Store the receipt as a PDF file    ${row}[Order number]
-    #     ${screenshot}=    Take a screenshot of the robot    ${row}[Order number]
-    #     Embed the robot screenshot to the receipt PDF file    ${screenshot}    ${pdf}
-        # Go to order another robot
+        ${pdf} =    Store the receipt as a PDF file    ${row}[Order number]
+        ${screenshot} =    Take a screenshot of the robot    ${row}[Order number]
+        Embed the robot screenshot to the receipt PDF file    ${screenshot}    ${pdf}
+        Go to order another robot
+        # Exit For Loop    # debugging reasons
     END
-    # Create a ZIP file of the receipts
+    Create a ZIP file of the receipts
