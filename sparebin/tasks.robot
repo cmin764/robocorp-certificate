@@ -12,7 +12,6 @@ Library           RPA.PDF
 Library           Collections
 Library           OperatingSystem
 Library           RPA.Archive
-Library           RPA.Dialogs
 Library           RPA.Robocorp.Vault
 
 Suite Teardown    Close All Browsers
@@ -36,21 +35,7 @@ Close consent modal
     Click Button    class:btn-dark
 
 Get or download orders
-    Add icon    Warning
-    Add heading    Use existing orders file or download new one?
-    Add text input    orders_file
-    ...    label=Orders CSV File
-    ...    placeholder=${orders_file}
-    Add submit buttons    buttons=Existing,Download    default=Existing
-    
-    ${result} =    Run dialog
-    IF   "${result.submit}" == "Existing"
-        ${input_file} =     Set Variable If    "${result.orders_file}" != ""    ${result.orders_file}    ${orders_file}
-        Set Test Variable    ${orders_file}    ${input_file}
-    ELSE
-        Download    ${orders_url}    ${orders_file}    overwrite=True
-    END
-
+    Download    ${orders_url}    ${orders_file}    overwrite=${True}
     ${table} =    Read table from CSV    ${orders_file}
     [Return]    ${table}
 
